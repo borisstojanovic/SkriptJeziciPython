@@ -1,0 +1,56 @@
+{% extends 'master.html' %}
+
+{% block title %}
+    New image
+{% endblock %}
+
+{% block content %}
+
+    <form enctype="multipart/form-data" method="post" action="{% url 'images:new' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.title.id_for_label }}">{{ form.title.label_tag }}</label>
+            <input type="text" class="form-control" id="{{ form.title.id_for_label }}" name="{{ form.title.name }}">
+            {% if form.title.errors %}
+                <div class="alert alert-danger">
+                    <ul style="text-align: left">
+                        {% for error in form.title.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.description.id_for_label }}">{{ form.description.label_tag }}</label>
+            <textarea class="form-control" id="{{ form.description.id_for_label }}" name="{{ form.description.name }}" rows="5"></textarea>
+            {% if form.description.errors %}
+                <div class="alert alert-danger">
+                    <ul style="text-align: left">
+                        {% for error in form.description.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.path.id_for_label }}">{{ form.path.label_tag }}</label>
+            <input type="file" class="form-control-file" id="{{ form.path.id_for_label }}" name="{{ form.path.name }}"/>
+            {% if form.path.errors %}
+                <div class="alert alert-danger">
+                    <ul style="text-align: left">
+                        {% for error in form.path.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+
+        <input type="submit" class="btn btn-primary btn-lg" value="Add"/>
+    </form>
+
+{% endblock %}

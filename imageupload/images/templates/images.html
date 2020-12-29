@@ -1,0 +1,15 @@
+{%  extends 'master.html' %}
+
+{% block title %}
+    Images
+{% endblock %}
+
+{%  block content %}
+    <div class="list-group">
+        {% for image in images %}
+            <a class="list-group-item list-group-item-action" href="{% url 'images:image' image.id %}">
+                {{ image.title }}
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
